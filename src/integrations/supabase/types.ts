@@ -14,7 +14,140 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          department: string | null
+          first_name: string | null
+          hire_date: string | null
+          id: string
+          is_active: boolean | null
+          last_name: string | null
+          phone: string | null
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          first_name?: string | null
+          hire_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          role?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          first_name?: string | null
+          hire_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          assigned_to: string | null
+          body_type: string | null
+          color: string | null
+          cost: number | null
+          created_at: string
+          date_acquired: string | null
+          date_sold: string | null
+          description: string | null
+          exterior_color: string | null
+          features: string[] | null
+          fuel_type: string | null
+          id: string
+          images: string[] | null
+          interior_color: string | null
+          make: string
+          mileage: number | null
+          model: string
+          price: number
+          sold_price: number | null
+          status: string
+          transmission: string | null
+          updated_at: string
+          vin: string
+          year: number
+        }
+        Insert: {
+          assigned_to?: string | null
+          body_type?: string | null
+          color?: string | null
+          cost?: number | null
+          created_at?: string
+          date_acquired?: string | null
+          date_sold?: string | null
+          description?: string | null
+          exterior_color?: string | null
+          features?: string[] | null
+          fuel_type?: string | null
+          id?: string
+          images?: string[] | null
+          interior_color?: string | null
+          make: string
+          mileage?: number | null
+          model: string
+          price: number
+          sold_price?: number | null
+          status?: string
+          transmission?: string | null
+          updated_at?: string
+          vin: string
+          year: number
+        }
+        Update: {
+          assigned_to?: string | null
+          body_type?: string | null
+          color?: string | null
+          cost?: number | null
+          created_at?: string
+          date_acquired?: string | null
+          date_sold?: string | null
+          description?: string | null
+          exterior_color?: string | null
+          features?: string[] | null
+          fuel_type?: string | null
+          id?: string
+          images?: string[] | null
+          interior_color?: string | null
+          make?: string
+          mileage?: number | null
+          model?: string
+          price?: number
+          sold_price?: number | null
+          status?: string
+          transmission?: string | null
+          updated_at?: string
+          vin?: string
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicles_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
