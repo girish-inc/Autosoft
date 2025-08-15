@@ -8,6 +8,8 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Inventory from "./pages/Inventory";
+import Sales from "./pages/Sales";
+import Customers from "./pages/Customers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +31,16 @@ const App = () => (
             <Route path="/inventory" element={
               <ProtectedRoute>
                 <Inventory />
+              </ProtectedRoute>
+            } />
+            <Route path="/sales" element={
+              <ProtectedRoute>
+                <Sales />
+              </ProtectedRoute>
+            } />
+            <Route path="/customers" element={
+              <ProtectedRoute>
+                <Customers />
               </ProtectedRoute>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
