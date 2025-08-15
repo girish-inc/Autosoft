@@ -1,11 +1,14 @@
-import { Bell, Search, User, Moon, Sun } from "lucide-react";
+import { Bell, Search, User, Moon, Sun, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Header = () => {
   const [isDark, setIsDark] = useState(false);
+  const { profile, signOut } = useAuth();
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -50,18 +53,37 @@ export const Header = () => {
         </Button>
 
         {/* User Profile */}
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2 px-3 text-muted-foreground hover:text-foreground"
-        >
-          <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary-glow rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-primary-foreground" />
-          </div>
-          <div className="text-left hidden sm:block">
-            <div className="text-sm font-medium">John Smith</div>
-            <div className="text-xs text-muted-foreground">Sales Manager</div>
-          </div>
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              className="flex items-center gap-2 px-3 text-muted-foreground hover:text-foreground"
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary-glow rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <div className="text-left hidden sm:block">
+                <div className="text-sm font-medium">
+                  {profile?.first_name} {profile?.last_name}
+                </div>
+                <div className="text-xs text-muted-foreground capitalize">
+                  {profile?.role?.replace('_', ' ')}
+                </div>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuItem>
+              <User className="w-4 h-4 mr-2" />
+              Profile Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={signOut} className="text-red-600">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
