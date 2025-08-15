@@ -14,6 +14,77 @@ export type Database = {
   }
   public: {
     Tables: {
+      customers: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          assigned_to: string | null
+          city: string | null
+          created_at: string
+          credit_score: number | null
+          date_of_birth: string | null
+          driver_license: string | null
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          notes: string | null
+          phone: string | null
+          preferred_contact: string | null
+          state: string | null
+          updated_at: string
+          zip_code: string | null
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          assigned_to?: string | null
+          city?: string | null
+          created_at?: string
+          credit_score?: number | null
+          date_of_birth?: string | null
+          driver_license?: string | null
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          notes?: string | null
+          phone?: string | null
+          preferred_contact?: string | null
+          state?: string | null
+          updated_at?: string
+          zip_code?: string | null
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          assigned_to?: string | null
+          city?: string | null
+          created_at?: string
+          credit_score?: number | null
+          date_of_birth?: string | null
+          driver_license?: string | null
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          notes?: string | null
+          phone?: string | null
+          preferred_contact?: string | null
+          state?: string | null
+          updated_at?: string
+          zip_code?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "customers_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -58,6 +129,97 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      sales: {
+        Row: {
+          commission_amount: number | null
+          commission_rate: number | null
+          created_at: string
+          customer_id: string
+          delivery_date: string | null
+          down_payment: number | null
+          financing_amount: number | null
+          id: string
+          interest_rate: number | null
+          loan_term_months: number | null
+          monthly_payment: number | null
+          notes: string | null
+          sale_date: string | null
+          sale_price: number
+          salesperson_id: string | null
+          status: string
+          trade_in_value: number | null
+          trade_in_vehicle: string | null
+          updated_at: string
+          vehicle_id: string
+        }
+        Insert: {
+          commission_amount?: number | null
+          commission_rate?: number | null
+          created_at?: string
+          customer_id: string
+          delivery_date?: string | null
+          down_payment?: number | null
+          financing_amount?: number | null
+          id?: string
+          interest_rate?: number | null
+          loan_term_months?: number | null
+          monthly_payment?: number | null
+          notes?: string | null
+          sale_date?: string | null
+          sale_price: number
+          salesperson_id?: string | null
+          status?: string
+          trade_in_value?: number | null
+          trade_in_vehicle?: string | null
+          updated_at?: string
+          vehicle_id: string
+        }
+        Update: {
+          commission_amount?: number | null
+          commission_rate?: number | null
+          created_at?: string
+          customer_id?: string
+          delivery_date?: string | null
+          down_payment?: number | null
+          financing_amount?: number | null
+          id?: string
+          interest_rate?: number | null
+          loan_term_months?: number | null
+          monthly_payment?: number | null
+          notes?: string | null
+          sale_date?: string | null
+          sale_price?: number
+          salesperson_id?: string | null
+          status?: string
+          trade_in_value?: number | null
+          trade_in_vehicle?: string | null
+          updated_at?: string
+          vehicle_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sales_salesperson_id_fkey"
+            columns: ["salesperson_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "sales_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       vehicles: {
         Row: {
